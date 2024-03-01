@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row p-5">
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{mahalla.tuman.viloyat}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for viloyat in viloyatlar %}
+                <li><a class="dropdown-item" href="{% url 'viloyat-detail' viloyat.id %}">{{ viloyat }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+    
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{mahalla.tuman}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for x in tumanlar %}
+                {% if x.viloyat == mahalla.tuman.viloyat %}   
+                <li><a class="dropdown-item" href="{% url 'tuman-detail' x.id %}">{{x}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{ mahalla }}
+            </button>
+            <ul class="dropdown-menu">
+                {% for x in mahallalar %}
+                {% if x.tuman == mahalla.tuman %}
+                <li><a class="dropdown-item" href="{% url 'mahalla-detail' x.id %}">{{ x }}</a></h2>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-3 my-5">
+        <div class="border p-5">
+            {% for choice in mahalla.choices.all %}
+            <ul>
+                <li style="text-alighn: center;">{{choice}}</li>
+            </ul>
+            {% endfor %}
+            </div>
+    </div>
+
+    <div class="col-6" >
+    <img class="w-100 p-5 mx-auto d-block" src="{{ mahalla.image.url }}" />
+    </div>
+</div>
+<div class="btn-group dropup float-end p-5 pt-0" >
+    <button style="font-size: 30px;" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Yil
+    </button>
+    <ul class="dropdown-menu ">
+        {% for year in years %}
+        {% if year.mahalla == mahalla %}
+        <li><a class="dropdown-item" href="{% url 'year-detail' year.id %}">{{ year.year }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
+

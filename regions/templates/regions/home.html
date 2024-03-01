@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row p-5">
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+              Viloyat
+            </button>
+            <ul class="dropdown-menu">
+                {% for viloyat in viloyatlar %}
+                <li><a class="dropdown-item" href="{% url 'viloyat-detail' viloyat.id %}">{{ viloyat }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+    
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+              Tuman
+            </button>
+            <ul class="dropdown-menu">
+                {% for viloyat in viloyatlar %}
+                <li><a class="dropdown-item" href="#"></a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+              Mahalla
+            </button>
+            <ul class="dropdown-menu">
+                {% for viloyat in viloyatlar %}
+                <li><a class="dropdown-item" href="#"></a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+</div>
+{% endblock content %}

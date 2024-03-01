@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row p-5">
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{year.mahalla.tuman.viloyat}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for viloyat in viloyatlar %}
+                <li><a class="dropdown-item" href="{% url 'viloyat-detail' viloyat.id %}">{{ viloyat }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+    
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{year.mahalla.tuman}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for tuman in tumanlar %}
+                {% if tuman.viloyat == viloyat %}   
+                <li><a class="dropdown-item" href="{% url 'tuman-detail' tuman.id %}">{{tuman}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{ year.mahalla }}
+            </button>
+            <ul class="dropdown-menu">
+                {% for mahalla in mahallalar %}
+                {% if mahalla.tuman == year.mahalla.tuman %}
+                <li><a class="dropdown-item" href="{% url 'mahalla-detail' mahalla.id %}">{{ mahalla }}</a></h2>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-3 my-5">
+        <div class="border p-5">
+            {% for choice in year.mahalla.choices.all %}
+            <ul>
+                <li style="text-alighn: center;">{{choice}}</li>
+            </ul>
+            {% endfor %}
+            </div>
+    </div>
+
+    {% if year.year == 2024 %}
+    <div class="col-6" >
+            <img class="w-100 p-5 mx-auto d-block" src="{{ year.mahalla.image.url }}" />
+    </div>
+            <div class="col-3 my-5">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Tavsiya!</h4>
+                    <p>{{ year.tavsiya }}</p>
+                </div>
+            </div>
+        {% else %}
+        <div class="col-6" >
+            <img class="w-100 p-5 mx-auto d-block" src="{{ year.image.url }}" />
+        </div>
+        {% endif %}
+</div>
+<div class="btn-group dropup float-end p-5 pt-0" >
+    <button style="font-size: 30px;" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ year.year }}
+    </button>
+    <ul class="dropdown-menu">
+        {% for x in years %}
+        {% if x.mahalla == year.mahalla %}
+        <li><a class="dropdown-item" href="{% url 'year-detail' x.id %}">{{ x.year }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
+

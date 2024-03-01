@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row p-5">
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{tuman.viloyat}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for x in viloyatlar %}
+                <li><a class="dropdown-item" href="{% url 'viloyat-detail' x.id %}">{{ x }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+    
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{tuman}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for x in tumanlar %}
+                {% if x.viloyat == tuman.viloyat %}   
+                <li><a class="dropdown-item" href="{% url 'tuman-detail' x.id %}">{{x}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+              Mahalla
+            </button>
+            <ul class="dropdown-menu">
+                {% for mahalla in mahallalar %}
+                {% if mahalla.tuman == tuman %}
+                <li><a class="dropdown-item" href="{% url 'mahalla-detail' mahalla.id %}">{{ mahalla }}</a></h2>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-3"></div>
+
+    <div class="col-6" >
+    <img class="w-100 p-5 mx-auto d-block" src="{{ tuman.image.url }}" />
+    </div>
+
+    <div class="col-3"></div>
+</div>
+{% endblock content %}
+
+

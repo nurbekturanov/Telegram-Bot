@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row p-5">
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+                {{viloyat}}
+            </button>
+            <ul class="dropdown-menu">
+                {% for x in viloyatlar %}
+                <li><a class="dropdown-item" href="{% url 'viloyat-detail' x.id %}">{{ x }}</a></li>
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+    
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+              Tuman
+            </button>
+            <ul class="dropdown-menu">
+                {% for tuman in tumanlar %}
+                {% if tuman.viloyat == viloyat %}   
+                <li><a class="dropdown-item" href="{% url 'tuman-detail' tuman.id %}">{{ tuman }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-4">
+        <div class="dropdown">
+            <button class="w-50  btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="font-size: 30px;" aria-expanded="false">
+              Mahalla
+            </button>
+            <ul class="dropdown-menu">
+                {% for tuman in tumanlar %}
+                {% if tuman.viloyat == viloyat %}   
+                <li><a class="dropdown-item" href="#"></a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-3"></div>
+
+    <div class="col-6" >
+    <img class="w-100 p-5 mx-auto d-block" src="{{ viloyat.image.url }}" />
+    </div>
+
+    <div class="col-3"></div>
+</div>
+{% endblock content %}
+
+
+
+
+<h1>Viloyat</h1>
+<h1>{{viloyat}}</h1>
+<img src="{{ viloyat.image.url }}" />
+<tr>
+<h1>Tumanlar</h1>
+<h2>{% for tuman in tumanlar %}
+    {% if tuman.viloyat == viloyat %}
+    <h2><a href="{% url 'tuman-detail' tuman.id %}">{{ tuman }}</a></h2>
+    {% endif %}
+{% endfor %}</h2>
+<tr>
+<h1>Mahalla</h1>
